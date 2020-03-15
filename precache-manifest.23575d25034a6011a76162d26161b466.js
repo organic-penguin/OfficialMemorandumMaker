@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2673442ce34a23f7db281c584c8b02e8",
+    "revision": "7dd087f0503dc6f4d8d20a97813beaf3",
     "url": "//organic-penguin.github.io/OfficialMemorandumMaker/index.html"
   },
   {
-    "revision": "8ef3204df0d49a6e5f51",
+    "revision": "3a7c605031c8e2eba74d",
     "url": "//organic-penguin.github.io/OfficialMemorandumMaker/static/css/main.0ddf4b69.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "//organic-penguin.github.io/OfficialMemorandumMaker/static/js/2.66f25cce.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8ef3204df0d49a6e5f51",
-    "url": "//organic-penguin.github.io/OfficialMemorandumMaker/static/js/main.ed7858ee.chunk.js"
+    "revision": "3a7c605031c8e2eba74d",
+    "url": "//organic-penguin.github.io/OfficialMemorandumMaker/static/js/main.344914af.chunk.js"
   },
   {
     "revision": "a455c5f4699512e91776",

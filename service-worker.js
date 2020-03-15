@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "//organic-penguin.github.io/OfficialMemorandumMaker/precache-manifest.d17a107864513abe41b24a48f204faa8.js"
+  "//organic-penguin.github.io/OfficialMemorandumMaker/precache-manifest.23575d25034a6011a76162d26161b466.js"
 );
 
 self.addEventListener('message', (event) => {
