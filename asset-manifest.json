@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "//organic-penguin.github.io/OfficialMemorandumMaker/static/css/main.0ddf4b69.chunk.css",
-    "main.js": "//organic-penguin.github.io/OfficialMemorandumMaker/static/js/main.344914af.chunk.js",
-    "main.js.map": "//organic-penguin.github.io/OfficialMemorandumMaker/static/js/main.344914af.chunk.js.map",
-    "runtime-main.js": "//organic-penguin.github.io/OfficialMemorandumMaker/static/js/runtime-main.88911acb.js",
-    "runtime-main.js.map": "//organic-penguin.github.io/OfficialMemorandumMaker/static/js/runtime-main.88911acb.js.map",
-    "static/js/2.66f25cce.chunk.js": "//organic-penguin.github.io/OfficialMemorandumMaker/static/js/2.66f25cce.chunk.js",
-    "static/js/2.66f25cce.chunk.js.map": "//organic-penguin.github.io/OfficialMemorandumMaker/static/js/2.66f25cce.chunk.js.map",
-    "index.html": "//organic-penguin.github.io/OfficialMemorandumMaker/index.html",
-    "precache-manifest.23575d25034a6011a76162d26161b466.js": "//organic-penguin.github.io/OfficialMemorandumMaker/precache-manifest.23575d25034a6011a76162d26161b466.js",
-    "service-worker.js": "//organic-penguin.github.io/OfficialMemorandumMaker/service-worker.js",
-    "static/css/main.0ddf4b69.chunk.css.map": "//organic-penguin.github.io/OfficialMemorandumMaker/static/css/main.0ddf4b69.chunk.css.map",
-    "static/js/2.66f25cce.chunk.js.LICENSE.txt": "//organic-penguin.github.io/OfficialMemorandumMaker/static/js/2.66f25cce.chunk.js.LICENSE.txt"
+    "main.css": "/OfficialMemorandumMaker/static/css/main.0ddf4b69.chunk.css",
+    "main.js": "/OfficialMemorandumMaker/static/js/main.f2195415.chunk.js",
+    "main.js.map": "/OfficialMemorandumMaker/static/js/main.f2195415.chunk.js.map",
+    "runtime-main.js": "/OfficialMemorandumMaker/static/js/runtime-main.7ce08300.js",
+    "runtime-main.js.map": "/OfficialMemorandumMaker/static/js/runtime-main.7ce08300.js.map",
+    "static/js/2.798cc066.chunk.js": "/OfficialMemorandumMaker/static/js/2.798cc066.chunk.js",
+    "static/js/2.798cc066.chunk.js.map": "/OfficialMemorandumMaker/static/js/2.798cc066.chunk.js.map",
+    "index.html": "/OfficialMemorandumMaker/index.html",
+    "precache-manifest.0ae3efa7b45c24cf0a8e079c86f65a5e.js": "/OfficialMemorandumMaker/precache-manifest.0ae3efa7b45c24cf0a8e079c86f65a5e.js",
+    "service-worker.js": "/OfficialMemorandumMaker/service-worker.js",
+    "static/css/main.0ddf4b69.chunk.css.map": "/OfficialMemorandumMaker/static/css/main.0ddf4b69.chunk.css.map",
+    "static/js/2.798cc066.chunk.js.LICENSE.txt": "/OfficialMemorandumMaker/static/js/2.798cc066.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.88911acb.js",
-    "static/js/2.66f25cce.chunk.js",
+    "static/js/runtime-main.7ce08300.js",
+    "static/js/2.798cc066.chunk.js",
     "static/css/main.0ddf4b69.chunk.css",
-    "static/js/main.344914af.chunk.js"
+    "static/js/main.f2195415.chunk.js"
   ]
 }
