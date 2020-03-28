@@ -658,7 +658,7 @@ caption {
   overflow-x: auto; }
 
 @media (min-width: 600px) {
-  .contain-table { 
+  .contain-table {
     width: 100%; } }
 
 /* Navigation

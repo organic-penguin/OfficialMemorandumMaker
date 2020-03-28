@@ -8,6 +8,12 @@ const TableHeader = () => {
                 <th>From</th>
                 <th>Subject</th>
                 <th>First Paragraph</th>
+                <th>Unit</th>
+                <th>Date</th>
+                <th>Duty Title</th>
+                <th>Rank</th>
+                <th>Name</th>
+                <th>Branch</th>
             </tr>
         </thead>
     );
@@ -21,6 +27,12 @@ const TableBody = props => {
                 <td>{row.from}</td>
                 <td>{row.subject}</td>
                 <td>{row.para1}</td>
+                <td>{row.unit}</td>
+                <td>{row.date}</td>
+                <td>{row.dutytitle}</td>
+                <td>{row.rank}</td>
+                <td>{row.writersname}</td>
+                <td>{row.branch}</td>
             </tr>
         );
     });

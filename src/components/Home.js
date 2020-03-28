@@ -1,63 +1,84 @@
 import React, { Component } from 'react';
-import MemorandumDataClass from './Table'
-import Form from './Form'
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
+import MemorandumDataClass from './Table';
+import Form from './Form';
+import SetTest from './SetTest';
+import { Redirect } from 'react-router-dom';
 
 
 
 class Home extends Component {
 
+
   state = {
-      memorandum: [{"attn":"Loading...", "from":"Loading...", "subject":"Loading...", "para1": "Loading..." }],
+      memorandum: [{"attn":"Loading...", "from":"Loading...", "subject":"Loading...", "para1": "Loading...", "unit": "Loading...", "date": "Loading...", "dutytitle": "Loading...", "rank": "Loading...", "writersname": "Loading...", "branch": "Loading..." }],
       toDashboard: false,
   };
 
   handleSubmit = memorandum => {
+      //Causes table to change values
       this.setState({memorandum: [memorandum]});
-      console.log("this is memorandum " + memorandum);
-      console.log("memorandum 1 " + memorandum.attn);
-      console.log("memorandum 2 " + memorandum.from);
-      console.log("memorandum 1 " + memorandum.subject);
-      console.log("memorandum 2 " + memorandum.para1);
+
+      //Set individual items as variables into session storage
       var MEMOVAR = memorandum;
       sessionStorage.setItem(0, memorandum);
       console.log('memovar ' + MEMOVAR);
       console.log('memovar 1 ' + MEMOVAR.attn);
       console.log('memovar 2 ' + MEMOVAR.from);
       sessionStorage.setItem(1, MEMOVAR);
-      sessionStorage.setItem(2, MEMOVAR.attn);
-      sessionStorage.setItem(3, MEMOVAR.from);
-      sessionStorage.setItem(4, MEMOVAR.subject);
-      sessionStorage.setItem(5, MEMOVAR.para1);
-      console.log(sessionStorage.getItem(0));
-      console.log(sessionStorage.getItem(1));
-      console.log(sessionStorage.getItem(2));
-      console.log(sessionStorage.getItem(3));
-      console.log(sessionStorage.getItem(4));
-      console.log(sessionStorage.getItem(5));
+      sessionStorage.setItem("attn", MEMOVAR.attn);
+      sessionStorage.setItem("from", MEMOVAR.from);
+      sessionStorage.setItem("subject", MEMOVAR.subject);
+      sessionStorage.setItem("para1", MEMOVAR.para1);
+      sessionStorage.setItem("unit", MEMOVAR.unit);
+      sessionStorage.setItem("date", MEMOVAR.date);
+      sessionStorage.setItem("dutytitle", MEMOVAR.dutytitle);
+      sessionStorage.setItem("rank", MEMOVAR.rank);
+      sessionStorage.setItem("writersname", MEMOVAR.writersname);
+      sessionStorage.setItem("branch", MEMOVAR.branch);
       console.log("All storage actions have been completed, moving to memo page");
+      //True state causes render section to redirect
       this.setState({toDashboard: true});
 
   }
 
-  clearForm = memorandum => {
-      console.log("clearForm button pressed");
-      this.setState({memorandum: [{"attn":" ", "from":" ", "subject":" ", "para1": " "  }]});
-      sessionStorage.clear();
-      alert("The information in your memorandum has been cleared.");
+
+  testMemoSubmit = testMemo => {
+    console.log('executed');
+      //Set state of table to values received from SetTest.js
+      this.setState({memorandum: [testMemo]});
+      //Execute traditional handle submit by passing same variables
+      this.handleSubmit(testMemo);
   }
+
+
+
 
   componentDidMount(){
     setTimeout(() => {
-      var LSGETATTN = sessionStorage.getItem(2);
-      var LSGETFROM = sessionStorage.getItem(3);
-      var LSGETSUBJECT = sessionStorage.getItem(4);
-      var LSGETPARA = sessionStorage.getItem(5);
-      console.log('Retrieved from sessionStorage ATTN = ' + LSGETATTN);
-      console.log('Retrieved from sessionStorage from = ' + LSGETFROM);
+      //Grab variables from session storage
+      var LSGETATTN = sessionStorage.getItem("attn");
+      var LSGETFROM = sessionStorage.getItem("from");
+      var LSGETSUBJECT = sessionStorage.getItem("subject");
+      var LSGETPARA = sessionStorage.getItem("para1");
+      var LSGETUNIT = sessionStorage.getItem("from");
+      var LSGETDATE = sessionStorage.getItem("date");
+      var LSGETDUTYTITLE = sessionStorage.getItem("dutytitle");
+      var LSGETRANK = sessionStorage.getItem("rank");
+      var LSGETWRITERSNAME = sessionStorage.getItem("writersname");
+      var LSGETBRANCH = sessionStorage.getItem("branch");
 
-      console.log(this.state);
-      this.setState({memorandum: [{"attn": LSGETATTN, "from": LSGETFROM, "subject": LSGETSUBJECT, "para1": LSGETPARA}]})
+      //Change table values to what is pulled form session storage
+      this.setState({memorandum: [{attn: LSGETATTN,
+        from: LSGETFROM,
+        subject: LSGETSUBJECT,
+        para1: LSGETPARA,
+        unit: LSGETUNIT,
+        date: LSGETDATE,
+        dutytitle: LSGETDUTYTITLE,
+        rank: LSGETRANK,
+        writersname: LSGETWRITERSNAME,
+        branch: LSGETBRANCH
+      }]})
       console.log(this.state);
     }, 1000)
   }
@@ -67,15 +88,15 @@ class Home extends Component {
     if (this.state.toDashboard === true){
       return (<Redirect to='memorandum' />)
     }
+
+
     return (
-      <div className="container">
+
+      <div className="w3-center">
       <h2>Memorandum Builder</h2>
-          <MemorandumDataClass memorandumData={memorandum}  />
-          <h3>Add New</h3>
           <Form handleSubmit={this.handleSubmit} />
-          <button onClick={this.clearForm} type="submit">
-              Clear Form
-          </button>
+          <MemorandumDataClass memorandumData={memorandum}  />
+          <SetTest style={{marginTop: '10px', display:'inline-block'}} testMemoSubmit={this.testMemoSubmit}/>
       </div>
 
     );
