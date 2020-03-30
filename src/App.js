@@ -3,22 +3,12 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
 import Memorandum from './components/Memorandum';
-import SetTest from './components/SetTest';
 import GenerateMemorandum from './components/GenerateMemorandum';
 
 
 
 class App extends Component {
-
-
-
-
-
   render() {
-
-
-
-
     return (
     <Router>
         <div>
@@ -27,8 +17,9 @@ class App extends Component {
           <ul className="navbar-nav mr-auto">
             <li><Link to={'/OfficialMemorandumMaker/'} className="nav-link"> Home </Link></li>
             <li><Link to={'/OfficialMemorandumMaker/memorandum'} className="nav-link">Memorandum</Link></li>
-            <button form="setTestForm" type="submit">Set Test</button>
-            <GenerateMemorandum />
+            <li><Link to={'/OfficialMemorandumMaker/about'} className="nav-link">About</Link></li>
+            <button style={{marginLeft: '5px', marginRight: '5px'}} form="setTestForm" type="submit">Set Test</button>
+
 
           </ul>
           </nav>
@@ -44,5 +35,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;

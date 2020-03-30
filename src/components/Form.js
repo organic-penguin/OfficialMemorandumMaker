@@ -1,161 +1,179 @@
 import React, {Component} from 'react';
 import Moment from 'moment';
+import ParagraphInputs from "./AdditionalParagraphs";
 import '.././App.css';
 
-        var currentDate = new Date();
-        currentDate.setDate(currentDate.getDate());
-        var todaysDate = currentDate.toISOString().substr(0,10);
-			var testDate = currentDate.toISOString();
-		  var formattedDateTwo = Moment(currentDate.toISOString()).format('YYYY-MM-DD');
+var currentDate = new Date();
+currentDate.setDate(currentDate.getDate());
+var formattedDateTwo = Moment(currentDate.toISOString()).format('YYYY-MM-DD');
 
 class Form extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.initialState = {
-            attn: 'Insert Receiver of Memorandum Here',
-            from: 'Insert Sender Information Here',
-            subject: 'Insert Subject Here',
-            para1: 'Insert First Paragraph',
-            unit: 'Type your Unit Here',
-            dutytitle: "Enter Signer's Position Here",
-            rank: "Select Signer's Rank",
-            writersname: "Insert Signer's Name FIRST MI. LAST",
-            branch: "United States Air Force"
-        };
+    this.initialState = {
+      attn: 'Insert Receiver of Memorandum Here',
+      from: 'Insert Sender Information Here',
+      subject: 'Insert Subject Here',
+      para1: 'Insert Paragraph 1',
+      para2: 'Insert Second Paragraph',
+      unit: 'Type your Unit Here',
+      dutytitle: "Enter Signer's Position Here",
+      rank: "Select Signer's Rank",
+      writersname: "Insert Signer's Name FIRST MI. LAST",
+      branch: "USAF",
+      paragraphArray: [
+        {
+          paraInfo: ""
+        }
+      ]
+    };
 
-        this.state = this.initialState;
-        this.handleChange = this.handleChange.bind(this);
-        this.handleChangeUpper = this.handleChangeUpper.bind(this);
+    this.state = this.initialState;
+    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeUpper = this.handleChangeUpper.bind(this);
+  }
+
+  handleParagraphChange = (e) => {
+    if (["paraInfo"].includes(e.target.className)) {
+      let paragraphArray = [...this.state.paragraphArray]
+      paragraphArray[e.target.dataset.id][e.target.className] = e.target.value
+      this.setState({paragraphArray})
+    } else{
+      const {name, value} = e.target;
+      this.setState({[name]: value});
+
     }
+  }
 
+  addParagraph = (e) => {
+    this.setState((prevState) => ({
+      paragraphArray: [
+        ...prevState.paragraphArray, {
+          paraInfo: ""
+        }
+      ]
+    }));
+  }
 
-
-    handleChange(event){
-        const { name, value } = event.target;
-        this.setState({
-            [name] : value
-        });
+  convertParagraphArray(conversionArray) {
+    console.log("Converting Paragraph Array")
+    var text = [];
+    var x;
+    for (x in conversionArray) {
+      text.push(conversionArray[x]);
+      console.log(text[x].paraInfo);
     }
+  }
 
-    handleChangeUpper(event){
-        const { name, value } = event.target;
-        this.setState({writersNameUpper: event.target.value.toUpperCase()});
-        this.setState({writersname: event.target.value.toUpperCase()});
-    }
+  handleChange(event) {
+    const {name, value} = event.target;
+    this.setState({[name]: value});
+  }
 
-    onFormSubmit = (event) => {
-        event.preventDefault();
-        this.props.handleSubmit(this.state);
-        this.setState(this.initialState);
-    }
+  handleChangeUpper(event) {
+    this.setState({writersNameUpper: event.target.value.toUpperCase()});
+    this.setState({writersname: event.target.value.toUpperCase()});
+  }
 
-    clearForm = memorandum => {
-        console.log("clearForm button pressed");
-        this.setState({memorandum: [{
-            attn:" ",
-            from:" ",
-            subject:" ",
-            para1: " ",
-            unit: " ",
-            date: " ",
-            dutytitle: " ",
-            rank: " ",
-            writersname: " ",
-            branch: " "
+  onFormSubmit = (event) => {
+    console.log(this.state);
+    console.log(this.state.paragraphArray[0]);
+    event.preventDefault();
+    this.props.handleSubmit(this.state);
+    this.setState(this.initialState);
+  }
 
-        }]});
-        sessionStorage.clear();
-        alert("The information in your memorandum has been cleared.");
-        window.location.reload();
-    }
+  clearForm = memorandum => {
+    console.log("clearForm button pressed");
+    this.setState({
+      memorandum: [
+        {
+          attn: " ",
+          from: " ",
+          subject: " ",
+          para1: " ",
+          para2: " ",
+          unit: " ",
+          date: " ",
+          dutytitle: " ",
+          rank: " ",
+          writersname: " ",
+          branch: " "
 
-componentDidMount(){
-//Prep form state for default value of todays date
-this.setState({date: formattedDateTwo}
+        }
+      ]
+    });
+    sessionStorage.clear();
+    alert("The information in your memorandum has been cleared.");
+    window.location.reload();
+  }
 
-)
-}
+  componentDidMount() {
+    //Prep form state for default value of todays date
+    this.setState({date: formattedDateTwo})
+  }
 
-
-    render() {
-        const { attn, from, subject, para1, unit, date, dutytitle, rank, writersname, branch } = this.initialState;
-        //Identifies type and DOM target for each <td></td> type located on Table.js
-
-
-
-
-
+  render() {
+    const {
+      attn,
+      from,
+      subject,
+      para1,
+      unit,
+      dutytitle,
+      rank,
+      writersname,
+    } = this.initialState;
+    //Identifies type and DOM target for each <td></td> type located on Table.js
+    let {paragraphArray} = this.state;
 
         return (
-          <div style={{display: 'inline-block'}} class="w3-padding w3-round-xlarge w3-modal-content w3-card-4 w3-animate-zoom" >
-            <form class="formContainer w3-padding" id="memorandumForm" onSubmit={this.onFormSubmit}>
+          <div style={{display: 'inline-block'}} class="w3-padding w3-round-xlarge w3-modal-content w3-card-4 w3-animate-zoom">
+            <form class="formContainer w3-padding" id="memorandumForm" onSubmit={this.onFormSubmit} onChange={this.handleParagraphChange}>
 
 
-            {
-                //FIRST LINE
-            }
-        <div class= "col50">
-            <input
-                type="text"
-                name="unit"
-                id="unit"
-                placeholder={unit}
-                onChange={this.handleChange} />
-        </div>
-        <div class= "col50">
-            <input style={{height: '50px'}}
-                type="date"
-                name="date"
-                id="date"
-                defaultValue={formattedDateTwo}
-                onChange={this.handleChange} />
-        </div>
+              {
+              //FIRST LINE
+              }
+              <div class="col50">
+                <input type="text" name="unit" id="unit" placeholder={unit} onChange={this.handleChange} />
+              </div>
+              <div class="col50">
+                <input style={{height: '50px'}} type="date" name="date" id="date" defaultValue={formattedDateTwo} onChange={this.handleChange} />
+              </div>
 
 
-            {
-                //SECOND LINE
-            }
-        <div class="col50">
-            <input
-                type="text"
-                name="attn"
-                id="attn"
-                placeholder={attn}
-                onChange={this.handleChange} />
-        </div>
-        <div class="col50">
-            <input
-                type="text"
-                name="from"
-                id="from"
-                placeholder={from}
-                onChange={this.handleChange} />
-        </div>
+              {
+              //SECOND LINE
+              }
+              <div class="col50">
+                <input type="text" name="attn" id="attn" placeholder={attn} onChange={this.handleChange} />
+              </div>
+              <div class="col50">
+                <input type="text" name="from" id="from" placeholder={from} onChange={this.handleChange} />
+              </div>
 
 
 
 
 
-            {
-                //THIRD and FOURTH LINEs
-            }
-        <div class="col100">
-            <input style={{width:'98%'}}
-                type="text"
-                name="subject"
-                id="subject"
-                placeholder={subject}
-                onChange={this.handleChange} />
-        </div>
-        <div class="col100">
-            <textarea style={{height: '10%', width:'98%'}}
-                type="text"
-                name="para1"
-                id="para1"
-                placeholder={para1}
-                onChange={this.handleChange} />
-        </div>
+              {
+              //THIRD and FOURTH LINEs
+              }
+              <div class="col100">
+                <input style={{width:'98%'}} type="text" name="subject" id="subject" placeholder={subject} onChange={this.handleChange} />
+              </div>
+              <div class="col100">
+                <label>Paragraph #1</label>
+                <textarea style={{height: '10%', width:'98%'}} type="text" name="para1" id="para1" placeholder={para1} onChange={this.handleChange} />
+                </div>
+        <ParagraphInputs paragraphArray={paragraphArray} />
+        <button onClick={this.addParagraph} type="button">Add New Paragraph</button>
+
+
+
+
 
             {
 
@@ -181,10 +199,10 @@ this.setState({date: formattedDateTwo}
                 type="text"
                 name="branch"
                 id="branch"
-                placeholder={branch}
+                defaultValue="USAF"
                 onChange={this.handleChange} >
                     <option value="" disabled >Choose Your Branch</option>
-                    <option value="USAF" selected>United States Air Force</option>
+                    <option value="USAF">United States Air Force</option>
                     <option value="USA">United States Army</option>
                     <option value="USN">United States Navy</option>
                     <option value="USMC">United States Marine Corps</option>
@@ -210,8 +228,9 @@ this.setState({date: formattedDateTwo}
                 name="rank"
                 id="rank"
                 placeholder={rank}
+                defaultValue=""
                 onChange={this.handleChange} >
-                    <option value="" disabled selected>Choose Your Rank</option>
+                    <option value="" disabled>Choose Your Rank</option>
                     <option value="AB">Airman Basic</option>
                     <option value="Amn">Airman</option>
                     <option value="A1C">Airman First Class</option>
@@ -246,6 +265,7 @@ this.setState({date: formattedDateTwo}
         <button style={{width: "100%"}} onClick={this.clearForm} >
             Clear Form
         </button>
+
         </div>
 </div>
 

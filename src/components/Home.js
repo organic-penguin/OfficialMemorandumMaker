@@ -1,18 +1,30 @@
 import React, { Component } from 'react';
-import MemorandumDataClass from './Table';
 import Form from './Form';
 import SetTest from './SetTest';
 import { Redirect } from 'react-router-dom';
-
 
 
 class Home extends Component {
 
 
   state = {
-      memorandum: [{"attn":"Loading...", "from":"Loading...", "subject":"Loading...", "para1": "Loading...", "unit": "Loading...", "date": "Loading...", "dutytitle": "Loading...", "rank": "Loading...", "writersname": "Loading...", "branch": "Loading..." }],
+      memorandum: [{"attn":"Loading...", "from":"Loading...", "subject":"Loading...", "para1": "Loading...", "para2": "Loading...", "unit": "Loading...", "date": "Loading...", "dutytitle": "Loading...", "rank": "Loading...", "writersname": "Loading...", "branch": "Loading..." }],
       toDashboard: false,
   };
+
+
+  convertParagraphArray(conversionArray){
+    console.log("Converting Paragraph Array")
+    var text = [];
+    var x;
+    for (x in conversionArray){
+      text.push(conversionArray[x]);
+      console.log(text[x].paraInfo);
+      sessionStorage.setItem(x, text[x].paraInfo);
+      sessionStorage.setItem("extraParagraphs", x);
+    }
+
+  }
 
   handleSubmit = memorandum => {
       //Causes table to change values
@@ -20,11 +32,8 @@ class Home extends Component {
 
       //Set individual items as variables into session storage
       var MEMOVAR = memorandum;
-      sessionStorage.setItem(0, memorandum);
-      console.log('memovar ' + MEMOVAR);
-      console.log('memovar 1 ' + MEMOVAR.attn);
-      console.log('memovar 2 ' + MEMOVAR.from);
-      sessionStorage.setItem(1, MEMOVAR);
+      this.convertParagraphArray(MEMOVAR.paragraphArray);
+      sessionStorage.setItem("paragraphArray", MEMOVAR.paragraphArray)
       sessionStorage.setItem("attn", MEMOVAR.attn);
       sessionStorage.setItem("from", MEMOVAR.from);
       sessionStorage.setItem("subject", MEMOVAR.subject);
@@ -35,7 +44,7 @@ class Home extends Component {
       sessionStorage.setItem("rank", MEMOVAR.rank);
       sessionStorage.setItem("writersname", MEMOVAR.writersname);
       sessionStorage.setItem("branch", MEMOVAR.branch);
-      console.log("All storage actions have been completed, moving to memo page");
+      //console.log("All storage actions have been completed, moving to memo page");
       //True state causes render section to redirect
       this.setState({toDashboard: true});
 
@@ -48,6 +57,7 @@ class Home extends Component {
       this.setState({memorandum: [testMemo]});
       //Execute traditional handle submit by passing same variables
       this.handleSubmit(testMemo);
+
   }
 
 
@@ -55,11 +65,13 @@ class Home extends Component {
 
   componentDidMount(){
     setTimeout(() => {
+      sessionStorage.setItem("paragraphArray", null);
       //Grab variables from session storage
       var LSGETATTN = sessionStorage.getItem("attn");
       var LSGETFROM = sessionStorage.getItem("from");
       var LSGETSUBJECT = sessionStorage.getItem("subject");
       var LSGETPARA = sessionStorage.getItem("para1");
+      var LSGETPARA2 = sessionStorage.getItem(2);
       var LSGETUNIT = sessionStorage.getItem("from");
       var LSGETDATE = sessionStorage.getItem("date");
       var LSGETDUTYTITLE = sessionStorage.getItem("dutytitle");
@@ -72,6 +84,7 @@ class Home extends Component {
         from: LSGETFROM,
         subject: LSGETSUBJECT,
         para1: LSGETPARA,
+        para2: LSGETPARA2,
         unit: LSGETUNIT,
         date: LSGETDATE,
         dutytitle: LSGETDUTYTITLE,
@@ -79,12 +92,11 @@ class Home extends Component {
         writersname: LSGETWRITERSNAME,
         branch: LSGETBRANCH
       }]})
-      console.log(this.state);
+      //console.log(this.state);
     }, 1000)
   }
 
   render() {
-    const { memorandum } = this.state;
     if (this.state.toDashboard === true){
       return (<Redirect to='memorandum' />)
     }
@@ -95,7 +107,6 @@ class Home extends Component {
       <div className="w3-center">
       <h2>Memorandum Builder</h2>
           <Form handleSubmit={this.handleSubmit} />
-          <MemorandumDataClass memorandumData={memorandum}  />
           <SetTest style={{marginTop: '10px', display:'inline-block'}} testMemoSubmit={this.testMemoSubmit}/>
       </div>
 
