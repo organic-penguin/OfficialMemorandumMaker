@@ -189,15 +189,14 @@ body {
 
 p,
 ol,
-ul,
 dl,
 table {
   margin: 0 0 1.5rem 0; }
 
-ul li ul {
+ li  {
   margin-bottom: 0; }
 
-ol li ol {
+ li  {
   margin-bottom: 0; }
 
 h1,

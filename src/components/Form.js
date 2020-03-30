@@ -132,7 +132,7 @@ class Form extends Component {
           <div style={{display: 'inline-block'}} class="w3-padding w3-round-xlarge w3-modal-content w3-card-4 w3-animate-zoom">
             <form class="formContainer w3-padding" id="memorandumForm" onSubmit={this.onFormSubmit} onChange={this.handleParagraphChange}>
 
-
+            <label>Header</label>
               {
               //FIRST LINE
               }

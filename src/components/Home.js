@@ -93,7 +93,7 @@ class Home extends Component {
         branch: LSGETBRANCH
       }]})
       //console.log(this.state);
-    }, 1000)
+    }, 500)
   }
 
   render() {

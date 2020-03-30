@@ -55,7 +55,7 @@ class Memorandum extends Component {
       this.processExtraParagraphs()
       //Set values within review page
       this.setState({memorandum: [{attn: LSGETATTN, from: LSGETFROM, subject: LSGETSUBJECT, para1: LSGETPARA, para2: LSGETPARA2 , unit: LSGETUNIT, date: LSGETDATE, dutytitle: LSGETDUTYTITLE, rank: LSGETRANK, writersname: LSGETWRITERSNAME, branch:LSGETBRANCH}]});
-    }, 1000)
+    }, 500)
   }
 
 
