@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/OfficialMemorandumMaker/precache-manifest.2bd8a50acb0fe3b3d0aa983e170c0a31.js"
+  "/OfficialMemorandumMaker/precache-manifest.d84d30011cbf320c8efce6138ab52a0a.js"
 );
 
 self.addEventListener('message', (event) => {
