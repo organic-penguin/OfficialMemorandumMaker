@@ -7,9 +7,13 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "docx": "^5.0.2",
+    "file-saver": "^2.0.2",
+    "file-system": "^2.2.2",
     "jspdf-react": "^1.0.11",
     "moment": "^2.24.0",
     "react": "^16.13.0",
+    "react-device-detect": "^1.11.14",
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0"
   },

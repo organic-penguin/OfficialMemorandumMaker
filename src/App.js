@@ -22,13 +22,14 @@ class App extends Component {
     <Router>
         <div>
           <h2>Wecome to the Official Memorandum Maker</h2>
-          <nav className="navbar w3-round-xlarge navbar-expand-lg navbar-light" style={{boxShadow: '0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19)', backgroundColor: '464a4e'}}>
+          <nav className="navbar w3-round-xlarge navbar-expand-lg navbar-light" style={{height: 'auto', boxShadow: '0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19)', backgroundColor: '464a4e'}}>
           <ul className="w3-center" style={{flex:'auto', padding:'0', margin:'0'}}>
-            <Link to={'/OfficialMemorandumMaker/'}><button style={{margin: '0px', marginLeft: '5px', marginRight: '5px', height: '100%', display: 'inline'}}> Home </button></Link>
-            <Link to={'/OfficialMemorandumMaker/memorandum'}><button style={{margin: '0px', marginLeft: '5px', marginRight: '5px', height: '100%', display: 'inline'}}> Review </button></Link>
-            <button style={{margin: '0px', marginLeft: '5px', marginRight: '5px', height: '100%', display: 'inline'}} form="setTestForm" type="submit">Set Test Parameters</button>
-            <button style={{margin: '0px', marginLeft: '5px', marginRight: '5px', height: '100%', display: 'inline'}} onClick={this.AirForceWriterLink} type="button">Air Force Writer</button>
-            <button style={{margin: '0px', marginLeft: '5px', marginRight: '5px', height: '100%', display: 'inline'}} onClick={this.TheTongueAndQuillLink} type="button">The Tongue and Quill</button>
+            <Link to={'/OfficialMemorandumMaker/'}><button style={{margin: '5px', height: '50px', display: 'inline'}}> Home </button></Link>
+            <Link to={'/OfficialMemorandumMaker/memorandum'}><button style={{margin: '5px', height: '50px', display: 'inline'}}> Review </button></Link>
+            <button style={{margin: '5px', height: '50px', display: 'inline'}} form="setTestForm" type="submit">Set Test Parameters</button>
+            <button style={{margin: '5px', height: '50px', display: 'inline'}} onClick={this.AirForceWriterLink} type="button">Air Force Writer</button>
+            <button style={{margin: '5px', height: '50px', display: 'inline'}} onClick={this.TheTongueAndQuillLink} type="button">The Tongue and Quill</button>
+            <button style={{paddingTop: '10px', margin: '5px', height: '50px', display: 'inline'}} onClick={this.TheTongueAndQuillLink} type="button"><icon ariaHidden = "true" className="fa fa-github fa-2x"/></button>
           </ul>
           </nav>
           <hr />

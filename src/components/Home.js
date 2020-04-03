@@ -2,6 +2,24 @@ import React, { Component } from 'react';
 import Form from './Form';
 import SetTest from './SetTest';
 import { Redirect } from 'react-router-dom';
+import DoDSeal from '../images/DoD Seal.PNG'
+
+
+//This function will convert the iamge into a URL Base64
+function toDataURL(url, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      callback(reader.result);
+    }
+    reader.readAsDataURL(xhr.response);
+  };
+  xhr.open('GET', url);
+  xhr.responseType = 'blob';
+  xhr.send();
+}
+
 
 
 class Home extends Component {
@@ -44,6 +62,15 @@ class Home extends Component {
       sessionStorage.setItem("rank", MEMOVAR.rank);
       sessionStorage.setItem("writersname", MEMOVAR.writersname);
       sessionStorage.setItem("branch", MEMOVAR.branch);
+      //Run Image to URL function
+      toDataURL(DoDSeal, function(dataUrl) {
+        console.log('RESULT:', dataUrl);
+        sessionStorage.setItem('MemoHeaderLogoBase', dataUrl);
+      })
+
+
+
+
       //console.log("All storage actions have been completed, moving to memo page");
       //True state causes render section to redirect
       this.setState({toDashboard: true});

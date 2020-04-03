@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GenerateMemorandum from './GenerateMemorandum';
+import GenerateWordDocument from './GenerateWordDocument'
 import Moment from 'moment'
 
 var LSGETATTN;
@@ -82,7 +83,9 @@ class Memorandum extends Component {
     return (
         <div>
           <h2>Memorandum Review</h2>
-          <GenerateMemorandum />
+
+          <GenerateMemorandum /> <GenerateWordDocument/>
+          <br /><br/>
           DATE: {Moment(memorandum[0].date).format('DD MMMM YYYY')}
           <br /><br />
           MEMORANDUM FOR  {memorandum[0].attn}

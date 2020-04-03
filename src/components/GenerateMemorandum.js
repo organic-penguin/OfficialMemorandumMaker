@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import jsPDF from 'jspdf'
 import DoDSeal from '../images/DoD Seal.PNG'
+import {isMobile} from "react-device-detect"
 
 //Global Variables
 var lineHeight = 1.15,
@@ -19,7 +20,6 @@ var LSGETDUTYTITLE;
 var LSGETRANK;
 var LSGETWRITERSNAME;
 var LSGETBRANCH;
-
 var LSGETNUMBEROFPARAGRAPHS;
 
 let DATEHEIGHT = 1.75 + oneLineHeight;
@@ -29,13 +29,13 @@ let SUBJECTHEIGHT = FROMHEIGHT + (oneLineHeight * 2);
 let PARAONEHEIGHT = SUBJECTHEIGHT + (oneLineHeight * 2);
 var cursorY;
 
-//Generate pdf object as 'doc'
-var doc = new jsPDF({orientation: 'p', unit: "in", format: 'letter'});
+//Generate pdf object as 'pdf'
+var pdf = new jsPDF({orientation: 'p', unit: "in", format: 'letter'});
 
 function addWrappedText({
   text,
   textWidth,
-  doc,
+  pdf,
   fontSize = 12,
   fontType = 'normal',
   lineSpacing = oneLineHeight,
@@ -43,38 +43,25 @@ function addWrappedText({
   initialYPosition = PARAONEHEIGHT,
   pageWrapInitialYPosition = 1
 }) {
-  doc.setFontType(fontType);
-  doc.setFontSize(fontSize);
-  var textLines = doc.splitTextToSize(text, textWidth); // Split the text into lines
-  var pageHeight = doc.internal.pageSize.height - 1; // Get page height, we'll use this for auto-paging. TRANSLATE this line if using units other than `pt`
+  pdf.setFontType(fontType);
+  pdf.setFontSize(fontSize);
+  var textLines = pdf.splitTextToSize(text, textWidth); // Split the text into lines
+  var pageHeight = pdf.internal.pageSize.height - 1; // Get page height, we'll use this for auto-paging. TRANSLATE this line if using units other than `pt`
   cursorY = initialYPosition;
 
   textLines.forEach(lineText => {
     if (cursorY > pageHeight) { // Auto-paging
-      doc.addPage();
+      pdf.addPage();
       cursorY = pageWrapInitialYPosition;
     }
-    doc.text(xPosition, cursorY, lineText);
+    pdf.text(xPosition, cursorY, lineText);
     cursorY += lineSpacing;
 
   })
 }
 
 
-//This function will convert the iamge into a URL Base64
-function toDataURL(url, callback) {
-  var xhr = new XMLHttpRequest();
-  xhr.onload = function() {
-    var reader = new FileReader();
-    reader.onloadend = function() {
-      callback(reader.result);
-    }
-    reader.readAsDataURL(xhr.response);
-  };
-  xhr.open('GET', url);
-  xhr.responseType = 'blob';
-  xhr.send();
-}
+
 
 function insertMultipleParagraphs() {
   LSGETNUMBEROFPARAGRAPHS = sessionStorage.getItem("extraParagraphs");
@@ -85,7 +72,7 @@ function insertMultipleParagraphs() {
     addWrappedText({
       text: PARAGRAPH, // Put a really long string here
       textWidth: 6.5,
-      doc,
+      pdf,
 
       // Optional
       fontSize: '12',
@@ -110,32 +97,29 @@ class GenerateMemorandum extends Component {
     //set Document font information
     //HEADER
     //Insert header DOD logo
-    toDataURL(DoDSeal, function(dataUrl) {
-      console.log('RESULT:', dataUrl);
-      sessionStorage.setItem('MemoHeaderLogoBase', dataUrl);
-    })
-    doc.addImage(sessionStorage.getItem('MemoHeaderLogoBase').toString(), 'PNG', .4,.4,1,1)
+
+    pdf.addImage(sessionStorage.getItem('MemoHeaderLogoBase').toString(), 'PNG', .4,.4,1,1)
 
 
-    doc.setFont("Helvetica")
-    doc.setFontStyle("bold");
-    doc.setFontSize(12);
-    doc.text("DEPARTMENT OF THE AIR FORCE", 4.25, .845, null, null, "center");
-    doc.setFontStyle("normal");
-    doc.text(LSGETUNIT, 4.25, 1.039, "center");
+    pdf.setFont("Helvetica")
+    pdf.setFontStyle("bold");
+    pdf.setFontSize(12);
+    pdf.text("DEPARTMENT OF THE AIR FORCE", 4.25, .845, null, null, "center");
+    pdf.setFontStyle("normal");
+    pdf.text(LSGETUNIT, 4.25, 1.039, "center");
 
     //BODY
-    doc.setFont('Times New Roman');
-    doc.text(LSGETDATE, 7.5, DATEHEIGHT, null, null, "right");
-    doc.text("MEMORANDUM FOR  " + LSGETATTN, 1, ATTNHEIGHT);
-    doc.text("FROM:  " + LSGETFROM, 1, FROMHEIGHT);
-    doc.text("SUBJECT:  " + LSGETSUBJECT, 1, SUBJECTHEIGHT);
+    pdf.setFont('Times New Roman');
+    pdf.text(LSGETDATE, 7.5, DATEHEIGHT, null, null, "right");
+    pdf.text("MEMORANDUM FOR  " + LSGETATTN, 1, ATTNHEIGHT);
+    pdf.text("FROM:  " + LSGETFROM, 1, FROMHEIGHT);
+    pdf.text("SUBJECT:  " + LSGETSUBJECT, 1, SUBJECTHEIGHT);
 
     //PARAGRAPHS
-    //Split Text var textLines = doc.splitTextToSize(text, maxLineWidth);
+    //Split Text var textLines = pdf.splitTextToSize(text, maxLineWidth);
 
     //Legacy paragraph wrapping
-    //var PARA1WRAPPED = doc.splitTextToSize("1.  " + LSGETPARA, maxLineWidth);
+    //var PARA1WRAPPED = pdf.splitTextToSize("1.  " + LSGETPARA, maxLineWidth);
     //var PARA1TextHeight = (PARA1WRAPPED.length * fontSize * lineHeight) / ptsPerInch;
 
     var PARAGRAPH1 = '1.  ' + LSGETPARA;
@@ -143,7 +127,7 @@ class GenerateMemorandum extends Component {
     addWrappedText({
       text: PARAGRAPH1, // Put a really long string here
       textWidth: 6.5,
-      doc,
+      pdf,
 
       // Optional
       fontSize: '12',
@@ -159,19 +143,26 @@ class GenerateMemorandum extends Component {
 
     //SIGNATURE BLOCK
     //var SIGNATUREHEIGHT = PARAONEHEIGHT + PARA1TextHeight + (oneLineHeight * 5);
-    doc.text(LSGETWRITERSNAME + ', ' + LSGETRANK + ', ' + LSGETBRANCH, 4.5, cursorY + (oneLineHeight * 5));
-    doc.text(LSGETDUTYTITLE, 4.5, cursorY + (oneLineHeight * 6));
+    pdf.text(LSGETWRITERSNAME + ', ' + LSGETRANK + ', ' + LSGETBRANCH, 4.5, cursorY + (oneLineHeight * 5));
+    pdf.text(LSGETDUTYTITLE, 4.5, cursorY + (oneLineHeight * 6));
 
-    //doc.output('dataurlnewwindow');
-    var string = doc.output('datauristring');
-    var embed = "<embed width='100%' type='application/pdf' height='100%' src='" + string + "'/>"
+    pdf.setProperties({
+      title: LSGETSUBJECT,
+    })
+
+
+if (isMobile){
+  window.open(pdf.output('bloburl'))
+}else{
+    var string = pdf.output('bloburi');
+    var embed = "<iframe width='100%' type='application/pdf' height='100%' src='" + string + "'/>"
     var x = window.open();
     x.document.open();
     x.document.write(embed);
     x.document.close();
-
-    //Reinitialize the doc to clear previous states
-    doc = new jsPDF({orientation: 'p', unit: "in", format: 'letter'});
+}
+    //Reinitialize the pdf to clear previous states
+    pdf = new jsPDF({orientation: 'p', unit: "in", format: 'letter'});
 
   }
 
@@ -190,9 +181,9 @@ class GenerateMemorandum extends Component {
 
   render() {
     this.fillVariables();
-    return (<div>
+    return (<div style={{display:'inline'}}>
 
-      <button onClick={this.generateWrappedMemorandum2} type="submit">
+      <button style={{margin:'5px'}} onClick={this.generateWrappedMemorandum2} type="submit">
         Generate PDF
       </button>
     </div>)
