@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c9d336ec97261aef2af284219382030a",
+    "revision": "50b52aa24ad190b6b59d7ba164b96fda",
     "url": "/OfficialMemorandumMaker/index.html"
   },
   {
-    "revision": "d69738c84acd9a4873fc",
-    "url": "/OfficialMemorandumMaker/static/css/main.66b82dbd.chunk.css"
+    "revision": "27d9c10ad085b7106d99",
+    "url": "/OfficialMemorandumMaker/static/css/main.fc10632b.chunk.css"
   },
   {
-    "revision": "a5f5829c29c86491cec9",
-    "url": "/OfficialMemorandumMaker/static/js/2.7aad4973.chunk.js"
+    "revision": "8f94b4da2f3ae314a3d9",
+    "url": "/OfficialMemorandumMaker/static/js/2.663182f2.chunk.js"
   },
   {
     "revision": "ec69943f217f4e265f3b95d5ad7c2bda",
-    "url": "/OfficialMemorandumMaker/static/js/2.7aad4973.chunk.js.LICENSE.txt"
+    "url": "/OfficialMemorandumMaker/static/js/2.663182f2.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "d69738c84acd9a4873fc",
-    "url": "/OfficialMemorandumMaker/static/js/main.a3b564b6.chunk.js"
+    "revision": "27d9c10ad085b7106d99",
+    "url": "/OfficialMemorandumMaker/static/js/main.32aad9ff.chunk.js"
   },
   {
     "revision": "6051032ee18ffba4f76b",
