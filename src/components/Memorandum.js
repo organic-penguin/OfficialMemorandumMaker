@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, {
+  Component
+} from 'react';
 import GenerateMemorandum from './GenerateMemorandum';
 import GenerateWordDocument from './GenerateWordDocument'
 import Moment from 'moment'
-
 var LSGETATTN;
 var LSGETFROM;
 var LSGETSUBJECT;
@@ -14,31 +15,33 @@ var LSGETDUTYTITLE;
 var LSGETRANK;
 var LSGETWRITERSNAME;
 var LSGETBRANCH;
-
 var extraParagraphs;
 var extraParagraphWords = [];
-
-
-
 class Memorandum extends Component {
-
   state = {
-      memorandum: [{"attn":"Loading...", "from":"Loading...", "subject":"Loading...", "para1": "Loading...", "unit": "Loading...", "date": "Loading...", "dutytitle": "Loading...", "rank": "Loading...", "writersname": "Loading...", "branch": "Loading..." }],
-      toDashboard: false,
+    memorandum: [{
+      "attn": "Loading...",
+      "from": "Loading...",
+      "subject": "Loading...",
+      "para1": "Loading...",
+      "unit": "Loading...",
+      "date": "Loading...",
+      "dutytitle": "Loading...",
+      "rank": "Loading...",
+      "writersname": "Loading...",
+      "branch": "Loading..."
+    }],
+    toDashboard: false,
   };
-
-  processExtraParagraphs(){
+  processExtraParagraphs() {
     extraParagraphs = sessionStorage.getItem("extraParagraphs");
     var x;
-    for (x = 0; x <= extraParagraphs; x ++){
+    for (x = 0; x <= extraParagraphs; x++) {
       extraParagraphWords[x] = sessionStorage.getItem(x);
-      console.log("Paragraph " + x + " = " + extraParagraphWords[x]);
+      //console.log("Paragraph " + x + " = " + extraParagraphWords[x]);
     }
-
   }
-
-
-  componentDidMount(){
+  componentDidMount() {
     setTimeout(() => {
       //Get variables from saved input and assign to object
       LSGETATTN = sessionStorage.getItem("attn");
@@ -52,34 +55,42 @@ class Memorandum extends Component {
       LSGETRANK = sessionStorage.getItem("rank");
       LSGETWRITERSNAME = sessionStorage.getItem("writersname");
       LSGETBRANCH = sessionStorage.getItem("branch");
-
       this.processExtraParagraphs()
       //Set values within review page
-      this.setState({memorandum: [{attn: LSGETATTN, from: LSGETFROM, subject: LSGETSUBJECT, para1: LSGETPARA, para2: LSGETPARA2 , unit: LSGETUNIT, date: LSGETDATE, dutytitle: LSGETDUTYTITLE, rank: LSGETRANK, writersname: LSGETWRITERSNAME, branch:LSGETBRANCH}]});
+      this.setState({
+        memorandum: [{
+          attn: LSGETATTN,
+          from: LSGETFROM,
+          subject: LSGETSUBJECT,
+          para1: LSGETPARA,
+          para2: LSGETPARA2,
+          unit: LSGETUNIT,
+          date: LSGETDATE,
+          dutytitle: LSGETDUTYTITLE,
+          rank: LSGETRANK,
+          writersname: LSGETWRITERSNAME,
+          branch: LSGETBRANCH
+        }]
+      });
     }, 500)
   }
-
-
-
   render() {
-    //Set memoranudm variable value to state object
-    const { memorandum } = this.state;
-    //Initialize 'Moment' date formatting locale to english
-    Moment.locale('en');
-
-    const paragraphItems = [];
-
-    for(const [index, value] of extraParagraphWords.entries()){
-
-
-
-      paragraphItems.push(
-        <div key={index}>{index + 2}.  {value} <br /><br/></div>
-
-      )
-    }
-
-
+      //Set memoranudm variable value to state object
+      const {
+        memorandum
+      } = this.state;
+      //Initialize 'Moment' date formatting locale to english
+      Moment.locale('en');
+      const paragraphItems = [];
+      for (const [index, value] of extraParagraphWords.entries()) {
+        paragraphItems.push( < div key = {
+          index
+        } > {
+          index + 2
+        }. {
+          value
+        } < br / > < br / > < /div>)
+      }
     return (
         <div>
           <h2>Memorandum Review</h2>
