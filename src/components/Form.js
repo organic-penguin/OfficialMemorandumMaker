@@ -84,8 +84,8 @@ class Form extends Component {
     });
   }
   onFormSubmit = (event) => {
-    console.log(this.state);
-    console.log(this.state.paragraphArray[0]);
+    //console.log(this.state);
+    //console.log(this.state.paragraphArray[0]);
     event.preventDefault();
     this.props.handleSubmit(this.state);
     this.setState(this.initialState);

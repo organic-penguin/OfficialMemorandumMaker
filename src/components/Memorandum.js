@@ -82,6 +82,9 @@ class Memorandum extends Component {
       //Initialize 'Moment' date formatting locale to english
       Moment.locale('en');
       const paragraphItems = [];
+      if (sessionStorage.getItem(0) === ''){
+
+      }else {
       for (const [index, value] of extraParagraphWords.entries()) {
         paragraphItems.push( < div key = {
           index
@@ -90,7 +93,7 @@ class Memorandum extends Component {
         }. {
           value
         } < br / > < br / > < /div>)
-      }
+      }}
     return (
         <div>
           <h2>Memorandum Review</h2>

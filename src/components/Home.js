@@ -39,12 +39,12 @@ class Home extends Component {
     toDashboard: false,
   };
   convertParagraphArray(conversionArray) {
-    console.log("Converting Paragraph Array")
+    //console.log("Converting Paragraph Array")
     var text = [];
     var x;
     for (x in conversionArray) {
       text.push(conversionArray[x]);
-      console.log(text[x].paraInfo);
+      //console.log(text[x].paraInfo);
       sessionStorage.setItem(x, text[x].paraInfo);
       sessionStorage.setItem("extraParagraphs", x);
     }
@@ -66,11 +66,11 @@ class Home extends Component {
     sessionStorage.setItem("date", MEMOVAR.date);
     sessionStorage.setItem("dutytitle", MEMOVAR.dutytitle);
     sessionStorage.setItem("rank", MEMOVAR.rank);
-    sessionStorage.setItem("writersname", MEMOVAR.writersname);
+    sessionStorage.setItem("writersname", MEMOVAR.writersname.toUpperCase());
     sessionStorage.setItem("branch", MEMOVAR.branch);
     //Run Image to URL function
     toDataURL(DoDSeal, function(dataUrl) {
-      console.log('RESULT:', dataUrl);
+      //console.log('RESULT:', dataUrl);
       sessionStorage.setItem('MemoHeaderLogoBase', dataUrl);
     })
     //console.log("All storage actions have been completed, moving to memo page");
@@ -80,7 +80,7 @@ class Home extends Component {
     });
   }
   testMemoSubmit = testMemo => {
-    console.log('executed');
+    //console.log('executed');
     //Set state of table to values received from SetTest.js
     this.setState({
       memorandum: [testMemo]

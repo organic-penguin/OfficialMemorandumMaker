@@ -2,13 +2,8 @@ import React, {
   Component
 } from 'react';
 import jsPDF from 'jspdf'
-import DoDSeal from '../images/DoD Seal.PNG'
 import {
-  isEdge,
-  isIPad13,
   isMobile,
-  isTablet,
-  isSafari,
   osName
 } from "react-device-detect"
 //Global Variables
@@ -70,6 +65,9 @@ function addWrappedText({
 function insertMultipleParagraphs() {
   LSGETNUMBEROFPARAGRAPHS = sessionStorage.getItem("extraParagraphs");
   var paras;
+  if (sessionStorage.getItem(0) === ''){
+
+  }else{
   for (paras = 0; paras <= LSGETNUMBEROFPARAGRAPHS; paras++) {
     var PARAGRAPH = (paras + 2) + '.  ' + (sessionStorage.getItem(paras));
     addWrappedText({
@@ -85,7 +83,7 @@ function insertMultipleParagraphs() {
       pageWrapInitialYPosition: 1 // Initial offset from top of document when page-wrapping
     });
   }
-}
+}}
 class GenerateMemorandum extends Component {
   state = {
     dateHeight: 1.9166,
@@ -135,7 +133,7 @@ class GenerateMemorandum extends Component {
     pdf.setProperties({
       title: LSGETSUBJECT,
     })
-    if (osName == 'Mac OS') {
+    if (osName === 'Mac OS') {
       var string = pdf.output('datauristring');
       var x = window.open();
       x.document.open();
@@ -143,12 +141,12 @@ class GenerateMemorandum extends Component {
     } else if (isMobile) {
       window.open(pdf.output('bloburl'))
     } else {
-      var string = pdf.output('bloburi');
-      var embed = "<iframe width='100%' type='application/pdf' height='100%' src='" + string + "'/>"
-      var x = window.open();
-      x.document.open();
-      x.document.write(embed);
-      x.document.close();
+      var elseString = pdf.output('bloburi');
+      var embed = "<iframe width='100%' type='application/pdf' height='100%' src='" + elseString + "'/>"
+      var elseX = window.open();
+      elseX.document.open();
+      elseX.document.write(embed);
+      elseX.document.close();
     }
     //Reinitialize the pdf to clear previous states
     pdf = new jsPDF({

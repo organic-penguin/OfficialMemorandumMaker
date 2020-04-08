@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import * as fs from "fs";
-import { Document, Media, Packer, TabStopType, TabStopPosition, Paragraph, TextRun, Header, TitlePage, PageSize, AlignmentType, UnderlineType, HeadingLevel } from "docx";
-import docx from "docx";
+import { Document, Media, Packer, Paragraph, TextRun, Header, AlignmentType } from "docx";
 import DoDSeal from '../images/DoD Seal.PNG'
-import {isMobile} from "react-device-detect"
 import {saveAs} from 'file-saver';
 
 

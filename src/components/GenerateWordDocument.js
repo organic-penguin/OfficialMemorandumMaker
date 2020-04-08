@@ -1,20 +1,14 @@
 import React, {
   Component
 } from 'react';
-import * as fs from "fs";
 import {
   Document,
   Media,
   Packer,
-  TabStopType,
-  TabStopPosition,
   Paragraph,
   TextRun,
   Header,
-  TitlePage,
-  PageSize,
   AlignmentType,
-  HeadingLevel
 } from "docx";
 import DoDSeal from '../images/DoD Seal.PNG'
 import {
