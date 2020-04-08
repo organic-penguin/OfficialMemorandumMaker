@@ -18,7 +18,7 @@ A ReactJS based static website that generates Official Memorandums in accordance
 
 * Export as a Microsoft Word Document (.doc(x))
 
-* ~~Mobile Device Compatibility~~ 7 April 2020
+* ~~Mobile Device Compatibility~~ *7 April 2020*
 
 * Multi-line ATTN/FROM sections
 
@@ -28,4 +28,4 @@ A ReactJS based static website that generates Official Memorandums in accordance
 
 * Formatting of the navigation bar on mobile devices
 
-* ~~Generation of PDF's on mobile devices causes issues with the aspect ratio and stretches out the PDF~~ 7 April 2020
+* ~~Generation of PDF's on mobile devices causes issues with the aspect ratio and stretches out the PDF~~ *7 April 2020*

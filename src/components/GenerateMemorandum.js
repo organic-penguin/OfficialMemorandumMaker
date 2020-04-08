@@ -136,7 +136,6 @@ class GenerateMemorandum extends Component {
       title: LSGETSUBJECT,
     })
     if (osName == 'Mac OS') {
-      alert("Beaty Sucks")
       var string = pdf.output('datauristring');
       var x = window.open();
       x.document.open();
