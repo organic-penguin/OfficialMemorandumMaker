@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ce70f6c0f0c7f9023ae6785876156729",
+    "revision": "0d1b21ebeb0d76c4f12dcc364a0f6d48",
     "url": "/OfficialMemorandumMaker/index.html"
   },
   {
-    "revision": "e9b270c4df5c17b67599",
+    "revision": "e726772d566283cdc64b",
     "url": "/OfficialMemorandumMaker/static/css/main.ff756f19.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/OfficialMemorandumMaker/static/js/2.ce99f799.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e9b270c4df5c17b67599",
-    "url": "/OfficialMemorandumMaker/static/js/main.7d487bdb.chunk.js"
+    "revision": "e726772d566283cdc64b",
+    "url": "/OfficialMemorandumMaker/static/js/main.142d0ada.chunk.js"
   },
   {
     "revision": "6051032ee18ffba4f76b",
