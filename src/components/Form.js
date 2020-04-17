@@ -234,8 +234,8 @@ class Form extends Component {
                     <option value="MSgt">Master Sergeant</option>
                     <option value="SMSgt">Senior Master Sergeant</option>
                     <option value="CMSgt">Chief Master Sergeant</option>
-                    <option value="1Lt">First Lieutineant</option>
                     <option value="2Lt">Second Lieutineant</option>
+                    <option value="1Lt">First Lieutineant</option>
                     <option value="Capt">Captain</option>
                     <option value="Maj">Major</option>
                     <option value="Lt. Col.">Lieutineant Colonel</option>
