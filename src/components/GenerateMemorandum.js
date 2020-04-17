@@ -124,8 +124,12 @@ class GenerateMemorandum extends Component {
       initialYPosition: PARAONEHEIGHT, // Initial offset from top of document; set based on prior objects in document
       pageWrapInitialYPosition: 1 // Initial offset from top of document when page-wrapping
     });
+
+
     //2-X paragraphs
     insertMultipleParagraphs(LSGETNUMBEROFPARAGRAPHS);
+
+
     //SIGNATURE BLOCK
     //var SIGNATUREHEIGHT = PARAONEHEIGHT + PARA1TextHeight + (oneLineHeight * 5);
     pdf.text(LSGETWRITERSNAME + ', ' + LSGETRANK + ', ' + LSGETBRANCH, 4.5, cursorY + (oneLineHeight * 5));
@@ -133,6 +137,9 @@ class GenerateMemorandum extends Component {
     pdf.setProperties({
       title: LSGETSUBJECT,
     })
+
+
+    //OS Detection for movile and various browsers. Generation incurrs errors depending on browser
     if (osName === 'Mac OS') {
       var string = pdf.output('datauristring');
       var x = window.open();

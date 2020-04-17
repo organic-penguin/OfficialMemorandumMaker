@@ -144,29 +144,29 @@ class Form extends Component {
         //FIRST LINE
         }
         <div class="col50">
-          <input type="text" name="unit" id="unit" placeholder={unit} onChange={this.handleChange} />
+          <input type="text" name="unit" id="unit" placeholder={unit} onChange={this.handleChange} required />
         </div>
         <div class="col50">
-          <input style={{height: '50px'}} type="date" name="date" id="date" defaultValue={formattedDateTwo} onChange={this.handleChange} />
+          <input style={{height: '50px'}} type="date" name="date" id="date" defaultValue={formattedDateTwo} onChange={this.handleChange}/>
         </div>
         {
         //SECOND LINE
         }
         <div class="col50">
-          <input type="text" name="attn" id="attn" placeholder={attn} onChange={this.handleChange} />
+          <input type="text" name="attn" id="attn" placeholder={attn} onChange={this.handleChange} required/>
         </div>
         <div class="col50">
-          <input type="text" name="from" id="from" placeholder={from} onChange={this.handleChange} />
+          <input type="text" name="from" id="from" placeholder={from} onChange={this.handleChange} required />
         </div>
         {
         //THIRD and FOURTH LINEs
         }
         <div class="col100">
-          <input style={{width:'98%'}} type="text" name="subject" id="subject" placeholder={subject} onChange={this.handleChange} />
+          <input style={{width:'98%'}} type="text" name="subject" id="subject" placeholder={subject} onChange={this.handleChange} required />
         </div>
         <div class="col100">
           <label>Paragraph #1</label>
-          <textarea style={{height: '10%', width:'98%'}} type="text" name="para1" id="para1" placeholder={para1} onChange={this.handleChange} />
+          <textarea style={{height: '10%', width:'98%'}} type="text" name="para1" id="para1" placeholder={para1} onChange={this.handleChange} required />
           </div>
         <ParagraphInputs paragraphArray={paragraphArray} />
         <button onClick={this.addParagraph} type="button">Add New Paragraph</button>
@@ -175,7 +175,7 @@ class Form extends Component {
                 //SIGNATURE BLOCK
             }
 
-            <label style={{display:'inline-block', width: '100%'}}>Signature Block</label>
+    <label style={{display:'inline-block', width: '100%'}}>Signature Block</label>
 
         <div class="col50" >
             <input
@@ -184,7 +184,8 @@ class Form extends Component {
                 id="writersname"
                 placeholder={writersname}
                 value={this.state.writersNameUpper}
-                onChange={this.handleChangeUpper} />
+                onChange={this.handleChangeUpper}
+                required/>
         </div>
 
 
@@ -195,6 +196,7 @@ class Form extends Component {
                 name="branch"
                 id="branch"
                 defaultValue="USAF"
+                required
                 onChange={this.handleChange} >
                     <option value="" disabled >Choose Your Branch</option>
                     <option value="USAF">United States Air Force</option>
@@ -210,7 +212,7 @@ class Form extends Component {
                 name="dutytitle"
                 id="dutytitle"
                 placeholder={dutytitle}
-                onChange={this.handleChange} />
+                onChange={this.handleChange} required />
         </div>
 
         <div class="col50">
@@ -220,6 +222,7 @@ class Form extends Component {
                 id="rank"
                 placeholder={rank}
                 defaultValue=""
+                required
                 onChange={this.handleChange} >
                     <option value="" disabled>Choose Your Rank</option>
                     <option value="AB">Airman Basic</option>

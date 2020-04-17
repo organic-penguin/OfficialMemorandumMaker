@@ -15,8 +15,10 @@ var LSGETDUTYTITLE;
 var LSGETRANK;
 var LSGETWRITERSNAME;
 var LSGETBRANCH;
+var LSGETLOGO;
 var extraParagraphs;
 var extraParagraphWords = [];
+
 class Memorandum extends Component {
   state = {
     memorandum: [{
@@ -43,18 +45,6 @@ class Memorandum extends Component {
   }
   componentDidMount() {
     setTimeout(() => {
-      //Get variables from saved input and assign to object
-      LSGETATTN = sessionStorage.getItem("attn");
-      LSGETFROM = sessionStorage.getItem("from");
-      LSGETSUBJECT = sessionStorage.getItem("subject");
-      LSGETPARA = sessionStorage.getItem("para1");
-      LSGETPARA2 = sessionStorage.getItem("paragraphArray");
-      LSGETUNIT = sessionStorage.getItem("unit");
-      LSGETDATE = sessionStorage.getItem("date");
-      LSGETDUTYTITLE = sessionStorage.getItem("dutytitle");
-      LSGETRANK = sessionStorage.getItem("rank");
-      LSGETWRITERSNAME = sessionStorage.getItem("writersname");
-      LSGETBRANCH = sessionStorage.getItem("branch");
       this.processExtraParagraphs()
       //Set values within review page
       this.setState({
@@ -72,7 +62,7 @@ class Memorandum extends Component {
           branch: LSGETBRANCH
         }]
       });
-    }, 500)
+    }, 200)
   }
   render() {
       //Set memoranudm variable value to state object
@@ -96,10 +86,8 @@ class Memorandum extends Component {
       }}
     return (
         <div>
-          <h2>Memorandum Review</h2>
-
           <GenerateMemorandum /> <GenerateWordDocument/>
-          <br /><br/>
+          <br /><br />
           DATE: {Moment(memorandum[0].date).format('DD MMMM YYYY')}
           <br /><br />
           MEMORANDUM FOR  {memorandum[0].attn}
@@ -126,4 +114,50 @@ class Memorandum extends Component {
   }
 }
 
-export default Memorandum;
+class Review extends Component {
+
+  state={
+    filled: false
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      //Handler for checking if the form has been filled out. If it has then the Memorandum section will be come viewable within the Review class render
+      //Get variables from saved input and assign to object
+      LSGETATTN = sessionStorage.getItem("attn");
+      LSGETFROM = sessionStorage.getItem("from");
+      LSGETSUBJECT = sessionStorage.getItem("subject");
+      LSGETPARA = sessionStorage.getItem("para1");
+      LSGETPARA2 = sessionStorage.getItem("paragraphArray");
+      LSGETUNIT = sessionStorage.getItem("unit");
+      LSGETDATE = sessionStorage.getItem("date");
+      LSGETDUTYTITLE = sessionStorage.getItem("dutytitle");
+      LSGETRANK = sessionStorage.getItem("rank");
+      LSGETWRITERSNAME = sessionStorage.getItem("writersname");
+      LSGETBRANCH = sessionStorage.getItem("branch");
+      LSGETLOGO = sessionStorage.getItem("MemoHeaderLogoBase");
+
+      if(LSGETATTN != undefined){
+        console.log("Date detected")
+        this.setState({filled: true})
+      }else if(LSGETATTN == undefined){
+        console.log(LSGETATTN)
+        console.log("date not detected")
+      }
+    }, 100)
+  }
+
+  render() {
+    return (
+        <div>
+          <h2>Memorandum Review</h2>
+          {!this.state.filled && <h2>Please fill out the form and sumbit</h2>}
+          {this.state.filled &&
+          <Memorandum />}
+        </div>
+
+    );
+  }
+}
+
+export default Review;

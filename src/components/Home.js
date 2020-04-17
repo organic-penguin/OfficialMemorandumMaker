@@ -54,6 +54,8 @@ class Home extends Component {
     this.setState({
       memorandum: [memorandum]
     });
+
+
     //Set individual items as variables into session storage
     var MEMOVAR = memorandum;
     this.convertParagraphArray(MEMOVAR.paragraphArray);
