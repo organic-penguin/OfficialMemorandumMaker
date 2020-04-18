@@ -7,7 +7,7 @@ const ParagraphInputs = (props) => {
       return (
         <div key={index} class="col100">
           <label htmlFor={paraID}>{`Paragraph #${index + 2}`}</label>
-          <textarea style={{height:'10%', width: '98%'}}
+          <textarea style={{height:'10%'}}
             type="text"
             name={paraID}
             data-id={index}

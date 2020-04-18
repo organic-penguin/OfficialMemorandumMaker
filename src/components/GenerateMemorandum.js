@@ -12,18 +12,20 @@ var lineHeight = 1.15,
   fontSize = 12,
   ptsPerInch = 72,
   oneLineHeight = (fontSize * lineHeight) / ptsPerInch;
+var LSGETDEPARTMENT;
 var LSGETATTN;
 var LSGETFROM;
 var LSGETSUBJECT;
 var LSGETPARA;
 var LSGETUNIT;
+var LSGETBASE;
 var LSGETDATE;
 var LSGETDUTYTITLE;
 var LSGETRANK;
 var LSGETWRITERSNAME;
 var LSGETBRANCH;
 var LSGETNUMBEROFPARAGRAPHS;
-let DATEHEIGHT = 1.75 + oneLineHeight;
+let DATEHEIGHT = 1.75 + .14;
 let ATTNHEIGHT = DATEHEIGHT + oneLineHeight;
 let FROMHEIGHT = ATTNHEIGHT + (oneLineHeight * 2);
 let SUBJECTHEIGHT = FROMHEIGHT + (oneLineHeight * 2);
@@ -97,9 +99,10 @@ class GenerateMemorandum extends Component {
     pdf.setFont("Helvetica")
     pdf.setFontStyle("bold");
     pdf.setFontSize(12);
-    pdf.text("DEPARTMENT OF THE AIR FORCE", 4.25, .845, null, null, "center");
+    pdf.text(LSGETDEPARTMENT, 4.25, .845, null, null, "center");
     pdf.setFontStyle("normal");
     pdf.text(LSGETUNIT, 4.25, 1.039, "center");
+    pdf.text(LSGETBASE, 4.25, 1.039 + oneLineHeight, "center");
     //BODY
     pdf.setFont('Times New Roman');
     pdf.text(LSGETDATE, 7.5, DATEHEIGHT, null, null, "right");
@@ -163,11 +166,13 @@ class GenerateMemorandum extends Component {
     });
   }
   fillVariables() {
+    LSGETDEPARTMENT = sessionStorage.getItem("department");
     LSGETATTN = sessionStorage.getItem("attn");
     LSGETFROM = sessionStorage.getItem("from");
     LSGETSUBJECT = sessionStorage.getItem("subject");
     LSGETPARA = sessionStorage.getItem("para1");
     LSGETUNIT = sessionStorage.getItem("unit");
+    LSGETBASE = sessionStorage.getItem("base");
     LSGETDATE = sessionStorage.getItem("date");
     LSGETDUTYTITLE = sessionStorage.getItem("dutytitle");
     LSGETRANK = sessionStorage.getItem("rank");

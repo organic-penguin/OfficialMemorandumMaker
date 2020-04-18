@@ -55,7 +55,7 @@ return (
         <button style={{margin: '5px', height: '50px', display: 'inline'}} onClick={this.AirForceWriterLink} type="button">Air Force Writer</button>
         <button style={{margin: '5px', height: '50px', display: 'inline'}} onClick={this.TheTongueAndQuillLink} type="button">The Tongue and Quill</button>
         <button style={{paddingTop: '10px', margin: '5px', height: '50px', display: 'inline'}} onClick={this.GitHubLink} type="button">
-          <icon ariaHidden="true" className="fa fa-github fa-2x" /></button>
+          <icon aria-hidden="true" className="fa fa-github fa-2x" /> </button>
       </ul>
     </nav>
     <hr />

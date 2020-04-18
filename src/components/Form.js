@@ -11,12 +11,15 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.initialState = {
+      department: 'DEPARTMENT OF THE AIR FORCE',
+      departmentNameUpper: "DEPARTMENT OF THE AIR FORCE",
+      unit: 'Type your Unit Here',
+      base: 'Optional Second Unit Header Line',
       attn: 'Insert Receiver of Memorandum Here',
       from: 'Insert Sender Information Here',
       subject: 'Insert Subject Here',
       para1: 'Insert Paragraph 1',
       para2: 'Insert Second Paragraph',
-      unit: 'Type your Unit Here',
       dutytitle: "Enter Signer's Position Here",
       rank: "Select Signer's Rank",
       writersname: "Insert Signer's Name FIRST MI. LAST",
@@ -31,6 +34,8 @@ class Form extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeUpper = this.handleChangeUpper.bind(this);
   }
+
+
   handleParagraphChange = (e) => {
     if (["paraInfo"].includes(e.target.className)) {
       let paragraphArray = [...this.state.paragraphArray]
@@ -39,15 +44,14 @@ class Form extends Component {
         paragraphArray
       })
     } else {
-      const {
-        name,
-        value
-      } = e.target;
+      const {name, value} = e.target;
       this.setState({
         [name]: value
       });
     }
   }
+
+
   addParagraph = (e) => {
     this.setState((prevState) => ({
       paragraphArray: [
@@ -57,8 +61,10 @@ class Form extends Component {
       ]
     }));
   }
+
+
   convertParagraphArray(conversionArray) {
-    console.log("Converting Paragraph Array")
+    //console.log("Converting Paragraph Array")
     var text = [];
     var x;
     for (x in conversionArray) {
@@ -67,21 +73,23 @@ class Form extends Component {
     }
   }
   handleChange(event) {
-    const {
-      name,
-      value
-    } = event.target;
+    const {name, value} = event.target;
     this.setState({
       [name]: value
     });
   }
   handleChangeUpper(event) {
+    const {name} = event.target;
+    var targetName;
+    if(name === "writersname"){
+      targetName = "writersNameUpper"
+    }else if(name === "department"){
+      targetName = "departmentNameUpper"
+    }
     this.setState({
-      writersNameUpper: event.target.value.toUpperCase()
+      [targetName]: event.target.value.toUpperCase()
     });
-    this.setState({
-      writersname: event.target.value.toUpperCase()
-    });
+
   }
   onFormSubmit = (event) => {
     //console.log(this.state);
@@ -92,15 +100,18 @@ class Form extends Component {
   }
   clearForm = memorandum => {
     console.log("clearForm button pressed");
+    //Uses this pre'generated memorandum to submit and refresh
     this.setState({
       memorandum: [
         {
+          department: " ",
           attn: " ",
           from: " ",
           subject: " ",
           para1: " ",
           para2: " ",
           unit: " ",
+          base: " ",
           date: " ",
           dutytitle: " ",
           rank: " ",
@@ -120,35 +131,61 @@ class Form extends Component {
     })
   }
   render() {
-      const {
-        attn,
-        from,
-        subject,
-        para1,
-        unit,
-        dutytitle,
-        rank,
-        writersname,
-      } = this.initialState;
+    const { department, attn, from, subject, para1, unit, base, dutytitle, rank, writersname, } = this.initialState;
       //Identifies type and DOM target for each <td></td> type located on Table.js
-      let {
-        paragraphArray
-      } = this.state;
+      let { paragraphArray } = this.state;
 
         return (
           <div style={{display: 'inline-block'}} class="w3-padding w3-round-xlarge w3-modal-content w3-card-4 w3-animate-zoom">
       <form class="formContainer w3-padding" id="memorandumForm" onSubmit={this.onFormSubmit} onChange={this.handleParagraphChange}>
 
+
         <label>Header</label>
         {
-        //FIRST LINE
+
+        //HEADER INFO
+
         }
         <div class="col50">
-          <input type="text" name="unit" id="unit" placeholder={unit} onChange={this.handleChange} required />
+          <input
+            type="text"
+            name="department"
+            id="department"
+            value = {this.state.departmentNameUpper}
+            placeholder={department}
+            onChange={this.handleChangeUpper} />
         </div>
+
         <div class="col50">
-          <input style={{height: '50px'}} type="date" name="date" id="date" defaultValue={formattedDateTwo} onChange={this.handleChange}/>
+          <input
+            type="text"
+            name="unit"
+            id="unit"
+            placeholder={unit}
+            onChange={this.handleChange}
+            required />
         </div>
+
+        <div class="col50">
+          <input
+            type="text"
+            name="base"
+            id="base"
+            placeholder={base}
+            onChange={this.handleChange} />
+        </div>
+
+
+        <div class="col50">
+          <input
+            style={{height: '50px'}}
+            type="date"
+            name="date"
+            id="date"
+            defaultValue={formattedDateTwo}
+            onChange={this.handleChange}/>
+        </div>
+
         {
         //SECOND LINE
         }
@@ -162,11 +199,11 @@ class Form extends Component {
         //THIRD and FOURTH LINEs
         }
         <div class="col100">
-          <input style={{width:'98%'}} type="text" name="subject" id="subject" placeholder={subject} onChange={this.handleChange} required />
+          <input  type="text" name="subject" id="subject" placeholder={subject} onChange={this.handleChange} required />
         </div>
         <div class="col100">
           <label>Paragraph #1</label>
-          <textarea style={{height: '10%', width:'98%'}} type="text" name="para1" id="para1" placeholder={para1} onChange={this.handleChange} required />
+          <textarea style={{height: '10%'}} type="text" name="para1" id="para1" placeholder={para1} onChange={this.handleChange} required />
           </div>
         <ParagraphInputs paragraphArray={paragraphArray} />
         <button onClick={this.addParagraph} type="button">Add New Paragraph</button>
@@ -234,15 +271,15 @@ class Form extends Component {
                     <option value="MSgt">Master Sergeant</option>
                     <option value="SMSgt">Senior Master Sergeant</option>
                     <option value="CMSgt">Chief Master Sergeant</option>
-                    <option value="2Lt">Second Lieutineant</option>
-                    <option value="1Lt">First Lieutineant</option>
+                    <option value="2d Lt">Second Lieutenant</option>
+                    <option value="1st Lt">First Lieutenant</option>
                     <option value="Capt">Captain</option>
                     <option value="Maj">Major</option>
-                    <option value="Lt. Col.">Lieutineant Colonel</option>
+                    <option value="Lt. Col.">Lieutenant Colonel</option>
                     <option value="Colonel">Colonel</option>
                     <option value="Brigadier Genearl">Brigadier General</option>
                     <option value="Major General">Major General</option>
-                    <option value="Lieutineant General">Lieutineant General</option>
+                    <option value="Lieutenant General">Lieutenant General</option>
                     <option value="General">General</option>
             </select>
         </div>

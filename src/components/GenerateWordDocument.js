@@ -1,25 +1,14 @@
-import React, {
-  Component
-} from 'react';
-import {
-  Document,
-  Media,
-  Packer,
-  Paragraph,
-  TextRun,
-  Header,
-  AlignmentType,
-} from "docx";
-import DoDSeal from '../images/DoD Seal.PNG'
-import {
-  saveAs
-} from 'file-saver';
+import React, {Component} from 'react';
+import { Document, Media, Packer, Paragraph, TextRun, Header, AlignmentType,} from "docx";
+import { saveAs} from 'file-saver';
 
+var LSGETDEPARTMENT;
 var LSGETATTN;
 var LSGETFROM;
 var LSGETSUBJECT;
 var LSGETPARA;
 var LSGETUNIT;
+var LSGETBASE;
 var LSGETDATE;
 var LSGETDUTYTITLE;
 var LSGETRANK;
@@ -45,8 +34,8 @@ class GenerateWordDocument extends Component {
     // Create document
     const doc = new Document({
       creator: "USAF",
-      title: "Sample Document",
-      description: "A brief example of using docx",
+      title: "Official Memorandum",
+      description: "Auto-Generated Memorandum",
       titlePage: true,
       styles: {
         paragraphStyles: [{
@@ -112,7 +101,7 @@ class GenerateWordDocument extends Component {
               spacing: {
                 before: 280
               },
-              text: "DEPARTMENT OF THE AIR FORCE",
+              text: LSGETDEPARTMENT,
               alignment: AlignmentType.CENTER,
               style: "Department"
             }),
@@ -121,6 +110,11 @@ class GenerateWordDocument extends Component {
               alignment: AlignmentType.CENTER,
               style: "Unit"
             }),
+            new Paragraph({
+             text: LSGETBASE,
+             alignment: AlignmentType.CENTER,
+             style: "Unit"
+           }),
              new Paragraph({
               children: [
                  dodseal
@@ -132,7 +126,7 @@ class GenerateWordDocument extends Component {
       children: [
               new Paragraph({
           spacing: {
-            before: 720
+            before: 500
           },
           text: LSGETDATE,
           alignment: AlignmentType.RIGHT,
@@ -259,7 +253,7 @@ class GenerateWordDocument extends Component {
       },
       children: [
            new Paragraph({
-          text: "DEPARTMENT OF THE AIR FORCE",
+          text: LSGETDEPARTMENT,
           alignment: AlignmentType.CENTER,
           style: "Department"
         }),
@@ -340,11 +334,13 @@ class GenerateWordDocument extends Component {
     });
   }
   fillVariables() {
+    LSGETDEPARTMENT = sessionStorage.getItem("department");
     LSGETATTN = sessionStorage.getItem("attn");
     LSGETFROM = sessionStorage.getItem("from");
     LSGETSUBJECT = sessionStorage.getItem("subject");
     LSGETPARA = sessionStorage.getItem("para1");
     LSGETUNIT = sessionStorage.getItem("unit");
+    LSGETBASE = sessionStorage.getItem("base");
     LSGETDATE = sessionStorage.getItem("date");
     LSGETDUTYTITLE = sessionStorage.getItem("dutytitle");
     LSGETRANK = sessionStorage.getItem("rank");

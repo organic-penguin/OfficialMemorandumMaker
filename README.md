@@ -10,7 +10,7 @@ A ReactJS based static website that generates Official Memorandums in accordance
 
 * Add seals of different units/upload your own
 
-* Change from Department of the Air Force to any department
+* ~~Change from Department of the Air Force to any department~~ *18 April 2020*
 
 * Export a 'Default' config file that you can save and use to reiterate your own information instead of having to type it in every time
 
@@ -27,5 +27,5 @@ A ReactJS based static website that generates Official Memorandums in accordance
 ##### Current Issues
 
 * Formatting of the navigation bar on mobile devices
-
+* CTRL + P for PDF's has issue in Chrome, PDF view print button works
 * ~~Generation of PDF's on mobile devices causes issues with the aspect ratio and stretches out the PDF~~ *7 April 2020*
