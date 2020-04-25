@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, HashRouter, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as HashRouter, Switch, Route, Link } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
 import Memorandum from './components/Memorandum';
@@ -15,28 +15,36 @@ class App extends Component {
           devMode: true,
       }
   }
-ToggleButton(){
-  this.setState((currentState) => ({
-      devMode: !currentState.devMode,
-  }));
-console.log(this.state.devMode)
+
+
+  ToggleButton(){
+    this.setState((currentState) => ({
+        devMode: !currentState.devMode,
+    }));
+  console.log(this.state.devMode)
+  }
+
+
+  //LINKS for Buttons
+    AirForceWriterLink(){
+        window.open("http://www.airforcewriter.com/officialmemorandum.htm");
+    }
+    TheTongueAndQuillLink(){
+        window.open("https://static.e-publishing.af.mil/production/1/saf_cio_a6/publication/afh33-337/afh33-337.pdf");
+    }
+    GitHubLink(){
+        window.open("https://github.com/organic-penguin/OfficialMemorandumMaker")
+    }
+
+
+render() {
+
+  //AutoGenerate the sessionStorage("adv"). Various issues are caused if it is not always present
+  if(sessionStorage.getItem("adv") === null){
+  sessionStorage.setItem("adv", ",,,")
 }
-
-  AirForceWriterLink(){
-      window.open("http://www.airforcewriter.com/officialmemorandum.htm");
-  }
-  TheTongueAndQuillLink(){
-      window.open("https://static.e-publishing.af.mil/production/1/saf_cio_a6/publication/afh33-337/afh33-337.pdf");
-  }
-  GitHubLink(){
-      window.open("https://github.com/organic-penguin/OfficialMemorandumMaker")
-  }
-
-
-  render() {
-
 return (
-<HashRouter basename='/'>
+<HashRouter basename={process.env.PUBLIC_URL + '/#/'}>
   <div>
     <h2>Wecome to the Official Memorandum Maker</h2>
 {/*
@@ -55,7 +63,7 @@ return (
         <button style={{margin: '5px', height: '50px', display: 'inline'}} onClick={this.AirForceWriterLink} type="button">Air Force Writer</button>
         <button style={{margin: '5px', height: '50px', display: 'inline'}} onClick={this.TheTongueAndQuillLink} type="button">The Tongue and Quill</button>
         <button style={{paddingTop: '10px', margin: '5px', height: '50px', display: 'inline'}} onClick={this.GitHubLink} type="button">
-          <icon aria-hidden="true" className="fa fa-github fa-2x" /> </button>
+          <icon aria-hidden="true" className="fa fa-github fa-2x" /></button>
       </ul>
     </nav>
     <hr />

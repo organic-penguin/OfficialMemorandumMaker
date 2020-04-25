@@ -45,7 +45,6 @@ class Home extends Component {
     var x;
     for (x in conversionArray) {
       text.push(conversionArray[x]);
-      //console.log(text[x].paraInfo);
       sessionStorage.setItem(x, text[x].paraInfo);
       sessionStorage.setItem("extraParagraphs", x);
     }
@@ -61,7 +60,8 @@ class Home extends Component {
     var MEMOVAR = memorandum;
     this.convertParagraphArray(MEMOVAR.paragraphArray);
     sessionStorage.setItem("department", MEMOVAR.department.toUpperCase());
-    sessionStorage.setItem("paragraphArray", MEMOVAR.paragraphArray);
+    console.log(MEMOVAR);
+    sessionStorage.setItem("paragraphArray", JSON.stringify(MEMOVAR.paragraphArray));
     sessionStorage.setItem("attn", MEMOVAR.attn);
     sessionStorage.setItem("from", MEMOVAR.from);
     sessionStorage.setItem("subject", MEMOVAR.subject);
@@ -115,7 +115,7 @@ class Home extends Component {
       <div className="w3-center">
       <h2>Memorandum Builder</h2>
           <Form handleSubmit={this.handleSubmit} />
-          <SetTest style={{marginTop: '10px', display:'inline-block'}} testMemoSubmit={this.testMemoSubmit}/>
+          <SetTest style={{marginTop: '20px'}} testMemoSubmit={this.testMemoSubmit}/>
       </div>
 
     );

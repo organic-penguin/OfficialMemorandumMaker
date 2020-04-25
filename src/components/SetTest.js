@@ -1,6 +1,4 @@
-import React, {
-  Component
-} from 'react';
+import React, { Component} from 'react';
 import '.././App.css';
 class SetTest extends Component {
   constructor(props) {
@@ -8,8 +6,8 @@ class SetTest extends Component {
     //Values that will be set in Set Test
     this.state = {
       department: "DEPARTMENT OF THE AIR FORCE",
-      attn: "Colonel Name Here",
-      from: "TSGT Shall Not Be Named",
+      attn: "31 MXG/MXQ",
+      from: "31 MXG/MXQ",
       subject: "The Creation of Memorandums",
       para1: "The following information on writing a memorandum comes from the AFH 33-337 Tongue and Quill, pages 183-186.  This template matches the format for the header on page 183, and the body on page 185.  The letterhead is in Arial with the “DEPARTMENT OF THE AIR FORCE” bolded, and the unit name un-bolded.  Addresses in the “MEMORADUM FOR” and “FROM”  are only if the letter for an off station addressee and are not required—however, office symbols are!",
       unit: "31ST FIGHTER WING (USAFE)",
@@ -30,10 +28,13 @@ class SetTest extends Component {
       }]
     };
   }
+
   testMemoSubmit = (event) => {
-    console.log('onFormSubmit2');
     event.preventDefault();
     this.props.testMemoSubmit(this.state);
+    sessionStorage.setItem("extraATTN", 2);
+    sessionStorage.setItem("extraFROM", 2);
+    sessionStorage.setItem("adv", "Unit 6118 Box 118 (not required),APO AE 09604  (not required),Unit 6118 Box 118 (not required),APO AE 09604  (not required)")
   }
 
     render() {

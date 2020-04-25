@@ -49,6 +49,14 @@ class Memorandum extends Component {
     setTimeout(() => {
       this.processExtraParagraphs()
       //Set values within review page
+      if(sessionStorage.getItem('adv') == null){
+      }else{
+      var advArray = sessionStorage.getItem("adv").split(',');
+      this.setState({attn2: advArray[0]})
+      this.setState({attn3: advArray[1]})
+      this.setState({from2: advArray[2]})
+      this.setState({from3: advArray[3]})
+      }
       this.setState({
         memorandum: [{
           department: LSGETDEPARTMENT,
@@ -96,9 +104,9 @@ class Memorandum extends Component {
           <br /><br />
           DATE: {Moment(memorandum[0].date).format('DD MMMM YYYY')}
           <br /><br />
-          MEMORANDUM FOR  {memorandum[0].attn}
+          MEMORANDUM FOR  {memorandum[0].attn}<br /> {this.state.attn2}<br /> {this.state.attn3}
           <br /><br />
-          FROM:  {memorandum[0].from}
+          FROM:  {memorandum[0].from}<br /> {this.state.from2}<br /> {this.state.from3}
           <br /><br />
           SUBJECT:  {memorandum[0].subject}
           <br /><br />
@@ -143,14 +151,14 @@ class Review extends Component {
       LSGETBRANCH = sessionStorage.getItem("branch");
 
       //Convert and resave date in proper format
-      LSGETDATE = Moment(LSGETDATE).format('DD MMMM YYYY');
-      sessionStorage.setItem("date", LSGETDATE)
-
+      if(LSGETDATE !== null){
+        LSGETDATE = Moment(LSGETDATE).format('DD MMMM YYYY')
+        sessionStorage.setItem('date', LSGETDATE);
+      }
       //Verify if theres input as validation to show the results vs fill request
-      if(LSGETATTN != undefined){
+      if(LSGETWRITERSNAME !== null){
         this.setState({filled: true})
-      }else if(LSGETATTN == undefined){
-        console.log(LSGETATTN)
+      }else{
       }
     }, 200)
   }

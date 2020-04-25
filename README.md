@@ -20,7 +20,7 @@ A ReactJS based static website that generates Official Memorandums in accordance
 
 * ~~Mobile Device Compatibility~~ *7 April 2020*
 
-* Multi-line ATTN/FROM sections
+* ~~Multi-line ATTN/FROM sections~~ *24 April 2020*
 
 
 

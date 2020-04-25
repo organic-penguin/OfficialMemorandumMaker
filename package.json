@@ -1,7 +1,7 @@
 {
-  "name": "react-tutorial",
+  "name": "Official Memorandum Maker",
   "homepage": "https://organic-penguin.github.io/OfficialMemorandumMaker/",
-  "version": "0.1.5",
+  "version": "1.1.5",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",

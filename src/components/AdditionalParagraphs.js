@@ -1,13 +1,14 @@
-// src/components/CatInputs.js
 import React from "react"
 const ParagraphInputs = (props) => {
   return (
     props.paragraphArray.map((val, index)=> {
       let paraID = `paragraph-${index +2}`
+
       return (
         <div key={index} class="col100">
           <label htmlFor={paraID}>{`Paragraph #${index + 2}`}</label>
-          <textarea style={{height:'10%'}}
+          <textarea
+          style={{height:'10%'}}
             type="text"
             name={paraID}
             data-id={index}
